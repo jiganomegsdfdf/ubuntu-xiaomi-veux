@@ -6,9 +6,9 @@ then
   exit
 fi
 
-VERSION="23.10"
+VERSION="24.04"
 
-truncate -s 6G rootfs.img
+truncate -s 2G rootfs.img
 mkfs.ext4 rootfs.img
 mkdir rootdir
 mount -o loop rootfs.img rootdir
@@ -23,9 +23,9 @@ mount --bind /proc rootdir/proc
 mount --bind /sys rootdir/sys
 
 echo "nameserver 1.1.1.1" | tee rootdir/etc/resolv.conf
-echo "xiaomi-nabu" | tee rootdir/etc/hostname
+echo "xiaomi-veux" | tee rootdir/etc/hostname
 echo "127.0.0.1 localhost
-127.0.1.1 xiaomi-nabu" | tee rootdir/etc/hosts
+127.0.1.1 xiaomi-veux" | tee rootdir/etc/hosts
 
 if uname -m | grep -q aarch64
 then
@@ -48,7 +48,7 @@ chroot rootdir apt update
 chroot rootdir apt upgrade -y
 
 #u-boot-tools breaks grub installation
-chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- $1
+chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools-
 
 #chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
 
@@ -60,29 +60,13 @@ chroot rootdir apt install -y rmtfs protection-domain-mapper tqftpserv
 #Remove check for "*-laptop"
 sed -i '/ConditionKernelVersion/d' rootdir/lib/systemd/system/pd-mapper.service
 
-cp /home/runner/work/ubuntu-xiaomi-nabu/ubuntu-xiaomi-nabu/xiaomi-nabu-debs_$2/*-xiaomi-nabu.deb rootdir/tmp/
-chroot rootdir dpkg -i /tmp/linux-xiaomi-nabu.deb
-chroot rootdir dpkg -i /tmp/firmware-xiaomi-nabu.deb
-chroot rootdir dpkg -i /tmp/alsa-xiaomi-nabu.deb
-rm rootdir/tmp/*-xiaomi-nabu.deb
+cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
+chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
+rm rootdir/tmp/*-xiaomi-veux.deb
 
-
-#EFI
-chroot rootdir apt install -y grub-efi-arm64
-
-sed --in-place 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' rootdir/etc/default/grub
-sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT=""/' rootdir/etc/default/grub
-
-#this done on device for now
-#grub-install
-#grub-mkconfig -o /boot/grub/grub.cfg
 
 #create fstab!
-echo "PARTLABEL=linux / ext4 errors=remount-ro,x-systemd.growfs 0 1
-PARTLABEL=esp /boot/efi vfat umask=0077 0 1" | tee rootdir/etc/fstab
-
-mkdir rootdir/var/lib/gdm
-touch rootdir/var/lib/gdm/run-initial-setup
+echo "PARTLABEL=cust / ext4 errors=remount-ro,x-systemd.growfs 0 1" | tee rootdir/etc/fstab
 
 chroot rootdir apt clean
 
