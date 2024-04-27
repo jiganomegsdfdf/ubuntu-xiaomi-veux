@@ -1,0 +1,6 @@
+Package: alsa-xiaomi-nabu
+Version: 1.0
+Architecture: arm64
+Maintainer: jiganomegsdfdf
+Depends: alsa-ucm-conf
+Description: Alsa UCM configurations for Redmi Note 11 Pro 5G

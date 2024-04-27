@@ -1,0 +1,6 @@
+Package: linux-xiaomi-veux
+Version: 6.9.0-sm6375
+Architecture: arm64
+Maintainer: jiganomegsdfdf
+Section: kernel
+Description: Kernel and Modules for Redmi Note 11 Pro 5G
