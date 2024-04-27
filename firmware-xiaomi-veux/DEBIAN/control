@@ -1,0 +1,7 @@
+Package: firmware-xiaomi-nabu
+Version: 1.0
+Architecture: arm64
+Maintainer: jiganomegsdfdf
+Conflicts: linux-firmware
+Replaces: linux-firmware
+Description: Firmware blobs for Redmi Note 11 Pro 5G
