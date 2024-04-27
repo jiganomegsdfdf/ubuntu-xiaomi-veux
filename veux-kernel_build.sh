@@ -3,10 +3,10 @@ git clone https://github.com/jiganomegsdfdf/linux.git --branch master --depth 1 
 cd linux
 make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- defconfig veux_defconfig
 make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
-_kernel_version="$(make kernelrelease -s)"
+#_kernel_version="$(make kernelrelease -s)"
 
 cp arch/arm64/boot/Image.gz ../boot-by-partition-build/boot32/kernel
-sed -i "s/kernel_size=10421535/kernel_size=${du ../boot-by-partition-build/boot32/kernel}/"
+sed -i "s/kernel_size=10421535/kernel_size=$(du ../boot-by-partition-build/boot32/kernel)/"
 
 
 #cp arch/arm64/boot/Image.gz ../linux-xiaomi-veux/boot/vmlinuz-$_kernel_version
