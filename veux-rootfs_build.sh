@@ -48,7 +48,7 @@ chroot rootdir apt update
 chroot rootdir apt upgrade -y
 
 #u-boot-tools breaks grub installation
-chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools-
+chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- gdm3 xfce4-desktop
 
 #chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
 
@@ -60,9 +60,9 @@ chroot rootdir apt install -y rmtfs protection-domain-mapper tqftpserv
 #Remove check for "*-laptop"
 sed -i '/ConditionKernelVersion/d' rootdir/lib/systemd/system/pd-mapper.service
 
-cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
-chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
-rm rootdir/tmp/*-xiaomi-veux.deb
+#cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
+#chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
+#rm rootdir/tmp/*-xiaomi-veux.deb
 
 
 #create fstab!
