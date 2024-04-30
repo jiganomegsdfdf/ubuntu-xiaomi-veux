@@ -48,7 +48,7 @@ chroot rootdir apt update
 chroot rootdir apt upgrade -y
 
 #u-boot-tools breaks grub installation
-chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- gdm3 xubuntu-desktop
+chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- gdm3 ubuntu-desktop
 
 #chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
 
