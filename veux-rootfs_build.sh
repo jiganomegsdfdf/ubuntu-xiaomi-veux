@@ -64,9 +64,15 @@ sed -i '/ConditionKernelVersion/d' rootdir/lib/systemd/system/pd-mapper.service
 #chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
 #rm rootdir/tmp/*-xiaomi-veux.deb
 
+#EFI
+chroot rootdir apt install -y grub-efi-arm64
+
+sed --in-place 's/^#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/' rootdir/etc/default/grub
+sed --in-place 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/GRUB_CMDLINE_LINUX_DEFAULT=""/' rootdir/etc/default/grub
 
 #create fstab!
 echo "PARTLABEL=cust / ext4 errors=remount-ro,x-systemd.growfs 0 1" | tee rootdir/etc/fstab
+echo "PARTLABEL=boot_b /boot/efi vfat umask=0077,nofail 0 1" | tee rootdir/etc/fstab
 
 chroot rootdir apt clean
 
