@@ -23,12 +23,6 @@ jobs:
         with:
           name: xiaomi-veux-debs
           path: ${{ github.workspace }}/*.deb
-
-      - name: Upload boot.img
-        uses: actions/upload-artifact@v4
-        with:
-          name: xiaomi-veux.img
-          path: ${{ github.workspace }}/boot-by-partition-build/*.img
           
   rootfs:
     # The type of runner that the job will run on
@@ -38,9 +32,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           pattern: xiaomi-veux-debs*
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: checksum*
       - name: Install Dependencies
         run: sudo apt update && sudo apt install unzip build-essential gcc-aarch64-linux-gnu bc flex bison 7zip kmod bash cpio binutils tar git wget dpkg libssl-dev
 
