@@ -18,17 +18,14 @@ jobs:
       - name: Build kernel
         run: sudo sh veux-kernel_build.sh ${{ matrix.version }}
 
-      - name: Build boot.img
-        run: sudo cat ./boot-by-partition-build/boot32/img_info && sudo mkdir ./boot-by-partition-build/boot32/ramdisk && sudo chmod +x ./boot-by-partition-build/* && ./boot-by-partition-build/mkboot ./boot-by-partition-build/boot32 ./boot-by-partition-build/boot.img
- 
       - name: Upload deb packages
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v4
         with:
           name: xiaomi-veux-debs
           path: ${{ github.workspace }}/*.deb
 
       - name: Upload boot.img
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v4
         with:
           name: xiaomi-veux.img
           path: ${{ github.workspace }}/boot-by-partition-build/*.img
@@ -54,6 +51,6 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           # Artifact name
-          name: ubuntu_24.04_tty_mainline
+          name: ubuntu_24.04_xfce_downstream
           path: rootfs.7z
           compression-level: 0
