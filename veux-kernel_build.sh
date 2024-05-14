@@ -18,4 +18,4 @@ make -j$(nproc) ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu-
 cd ..
 rm -rf linux
 
-dpkg-deb --build --root-owner-group firmware-xiaomi-veux
+#dpkg-deb --build --root-owner-group firmware-xiaomi-veux
