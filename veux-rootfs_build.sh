@@ -60,9 +60,11 @@ chroot rootdir apt install -y rmtfs protection-domain-mapper tqftpserv
 #Remove check for "*-laptop"
 sed -i '/ConditionKernelVersion/d' rootdir/lib/systemd/system/pd-mapper.service
 
-cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
+#cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
+cp $(find /home/runner/work -name "firmware-xiaomi-veux.deb") rootdir/tmp/
+dpkg-deb --build --root-owner-group firmware-xiaomi-veux
 chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
-rm rootdir/tmp/*-xiaomi-veux.deb
+#rm rootdir/tmp/*-xiaomi-veux.deb
 
 #EFI
 #chroot rootdir apt install -y grub-efi-arm64
