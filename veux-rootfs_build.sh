@@ -47,24 +47,23 @@ export DEBIAN_FRONTEND=noninteractive
 chroot rootdir apt update
 chroot rootdir apt upgrade -y
 
+#cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
+dpkg-deb --build --root-owner-group firmware-xiaomi-veux
+cp $(find /home/runner/work -name "firmware-xiaomi-veux.deb") rootdir/tmp/
+chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
+rm rootdir/tmp/*-xiaomi-veux.deb
+
 #u-boot-tools breaks grub installation
 chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- ubuntu-desktop-minimal gdm3
 
 chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
-
-
+chroot rootdir "chpasswd < 'root:1'"
 
 #Device specific
 chroot rootdir apt install -y rmtfs protection-domain-mapper tqftpserv
 
 #Remove check for "*-laptop"
 sed -i '/ConditionKernelVersion/d' rootdir/lib/systemd/system/pd-mapper.service
-
-#cp /home/runner/work/ubuntu-xiaomi-veux/ubuntu-xiaomi-veux/xiaomi-veux-debs/*-xiaomi-veux.deb rootdir/tmp/
-dpkg-deb --build --root-owner-group firmware-xiaomi-veux
-cp $(find /home/runner/work -name "firmware-xiaomi-veux.deb") rootdir/tmp/
-chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
-#rm rootdir/tmp/*-xiaomi-veux.deb
 
 #EFI
 #chroot rootdir apt install -y grub-efi-arm64
@@ -96,7 +95,4 @@ umount rootdir/dev
 umount rootdir
 
 rm -d rootdir
-
-echo 'cmdline for legacy boot: "root=PARTLABEL=linux"'
-
 7zz a rootfs.7z rootfs.img
