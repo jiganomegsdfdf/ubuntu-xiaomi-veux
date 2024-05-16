@@ -54,7 +54,7 @@ chroot rootdir dpkg -i /tmp/firmware-xiaomi-veux.deb
 rm rootdir/tmp/*-xiaomi-veux.deb
 
 #u-boot-tools breaks grub installation
-chroot rootdir apt install --no-install-recommends -y bash-completion sudo ssh nano u-boot-tools- ubuntu-desktop-minimal gdm3 snapd- firefox*snapd*
+chroot rootdir apt install --no-install-recommends -y bash-completion sudo ssh nano u-boot-tools- ubuntu-desktop-minimal gdm3 snapd- armor-utils- apparmor-notify- apparmor-profiles- apparmor-profiles-extra-
 
 chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
 chroot rootdir "chpasswd < 'root:1'"
