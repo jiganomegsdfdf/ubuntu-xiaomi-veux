@@ -6,7 +6,7 @@ then
   exit
 fi
 
-VERSION="23.10"
+VERSION="24.04"
 
 truncate -s 2G rootfs.img
 mkfs.ext4 rootfs.img
@@ -48,9 +48,9 @@ chroot rootdir apt update
 chroot rootdir apt upgrade -y
 
 #u-boot-tools breaks grub installation
-chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- ubuntu-desktop
+chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- ubuntu-desktop-minimal gdm3
 
-#chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
+chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
 
 
 
