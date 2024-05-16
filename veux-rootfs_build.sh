@@ -48,7 +48,7 @@ chroot rootdir apt update
 chroot rootdir apt upgrade -y
 
 #u-boot-tools breaks grub installation
-chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- lightdm lightdm-gtk-greeter xfce4
+chroot rootdir apt install -y bash-completion sudo ssh nano u-boot-tools- ubuntu-desktop
 
 #chroot rootdir gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts-only-mounted true
 
