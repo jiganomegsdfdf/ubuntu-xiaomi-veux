@@ -42,6 +42,6 @@ jobs:
         uses: actions/upload-artifact@v4.0.0
         with:
           # Artifact name
-          name: ubuntu_24.04_xfce_downstream
+          name: ubuntu_24.04_ubnt_downstream
           path: rootfs.7z
           compression-level: 0
